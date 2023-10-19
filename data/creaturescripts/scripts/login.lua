@@ -1,3 +1,18 @@
+local function onMovementRemoveProtection(cid, oldPosition, time)
+	local player = Player(cid)
+	if not player then
+		return true
+	end
+
+	local playerPosition = player:getPosition()
+	if (playerPosition.x ~= oldPosition.x or playerPosition.y ~= oldPosition.y or playerPosition.z ~= oldPosition.z) or player:getTarget() or time <= 0 then
+		player:setStorageValue(PlayerStorageKeys.combatProtectionStorage, 0)
+		return true
+	end
+
+	addEvent(onMovementRemoveProtection, 1000, cid, oldPosition, time - 1)
+end
+
 function onLogin(player)
 	local serverName = configManager.getString(configKeys.SERVER_NAME)
 	local loginStr = "Welcome to " .. serverName .. "!"
@@ -34,5 +49,12 @@ function onLogin(player)
 	player:registerEvent("PlayerDeath")
 	player:registerEvent("DropLoot")
 	player:registerEvent("BestiaryKills")
+
+	if player:getStorageValue(PlayerStorageKeys.combatProtectionStorage) <= os.time() then
+		player:setStorageValue(PlayerStorageKeys.combatProtectionStorage, os.time() + 10)
+
+		local playerId = player:getId()
+		onMovementRemoveProtection(playerId, player:getPosition(), 10)
+	end
 	return true
 end

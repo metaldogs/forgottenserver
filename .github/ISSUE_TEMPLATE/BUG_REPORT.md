@@ -6,7 +6,7 @@ about: Reporting a bug reproducible using unmodified engine
 
 ### Before creating an issue, please ensure:
 - [ ] This is a bug in the software that resides in this repository, and not a
-      support matter (use https://otland.net/forums/support.16/ for support)
+      support matter (use https://github.com/EPuncker/orts2/issues/ for support)
 - [ ] This issue is reproducible without changes to the C++ code in this repository
 
 ### Steps to reproduce (include any configuration/script required to reproduce)

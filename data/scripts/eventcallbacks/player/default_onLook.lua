@@ -51,6 +51,13 @@ ec.onLook = function(self, thing, position, distance, description)
 			end
 		end
 	end
+	if thing:isItem() then
+		if thing.actionid == 5640 then
+			description = description .. "a honeyflower patch."
+		elseif thing.actionid == 5641 then
+			description = description .. "a banana palm."
+		end
+	end
 	return description
 end
 

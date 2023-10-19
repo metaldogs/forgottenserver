@@ -8,4 +8,4 @@ insert_final_newline = true
 trim_trailing_whitespace = true
 
 [*.{lua,xml}]
-indent_style = tab
+indent_size = 4

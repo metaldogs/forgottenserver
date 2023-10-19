@@ -42,6 +42,10 @@ function Position:getNextPosition(direction, steps)
 	end
 end
 
+function Position.getTile(self)
+	return Tile(self)
+end
+
 function Position:moveUpstairs()
 	local swap = function(lhs, rhs)
 		lhs.x, rhs.x = rhs.x, lhs.x

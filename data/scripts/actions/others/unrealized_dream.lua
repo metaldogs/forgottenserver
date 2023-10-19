@@ -26,20 +26,22 @@ local config = {
 local unrealizedDream = Action()
 
 function unrealizedDream.onUse(player, item, fromPosition, target, toPosition, isHotkey)
-	local chance = math.random(0, 10000)
-	for i = 1, #config do
-		local randomItem = config[i]
-		if chance >= randomItem.chanceFrom and chance <= randomItem.chanceTo then
-			if randomItem.itemId then
-				local gift = randomItem.itemId
-				local msg = randomItem.message
+	if player:getPosition():isInRange(Position(33621, 32365, 5), Position(33634, 32375, 5)) then
+		local chance = math.random(0, 10000)
+		for i = 1, #config do
+			local randomItem = config[i]
+			if chance >= randomItem.chanceFrom and chance <= randomItem.chanceTo then
+				if randomItem.itemId then
+					local gift = randomItem.itemId
+					local msg = randomItem.message
 
-				player:addItem(gift, 1)
-				player:sendTextMessage(MESSAGE_EVENT_ADVANCE, msg)
+					player:addItem(gift, 1)
+					player:sendTextMessage(MESSAGE_EVENT_ADVANCE, msg)
+				end
+
+				item:remove(1)
+				return true
 			end
-
-			item:remove(1)
-			return true
 		end
 	end
 	return false

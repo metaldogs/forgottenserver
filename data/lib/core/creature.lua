@@ -19,13 +19,17 @@ function Creature.getClosestFreePosition(self, position, maxRadius, mustBeReacha
 			end
 
 			local tile = Tile(checkPosition)
-			if tile and tile:getCreatureCount() == 0 and not tile:hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID) and
+			if tile:getCreatureCount() == 0 and not tile:hasProperty(CONST_PROP_IMMOVABLEBLOCKSOLID) and
 				(not mustBeReachable or self:getPathTo(checkPosition)) then
 				return checkPosition
 			end
 		end
 	end
 	return Position()
+end
+
+function Creature.getMonster(self)
+	return self:isMonster() and self or nil
 end
 
 function Creature.getPlayer(self)
@@ -176,10 +180,6 @@ function Creature:canAccessPz()
 		return false
 	end
 	return true
-end
-
-function Creature.getMonster(self)
-	return self:isMonster() and self or nil
 end
 
 function Creature.getKillers(self, onlyPlayers)

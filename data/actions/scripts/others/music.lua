@@ -58,9 +58,21 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 		item:decay(instrument.decayId)
 	end
 
+	if item.itemid == 2071 then
+		if player:getPosition():isInRange(Position(32695, 31717, 2), Position(32699, 31719, 2)) then
+			local lyreProgress = player:getStorageValue(PlayerStorageKeys.Diapason.Lyre)
+			if lyreProgress < 7 and player:getStorageValue(PlayerStorageKeys.Diapason.Edala) ~= 1 and player:getStorageValue(PlayerStorageKeys.Diapason.LyreTimer) < os.time() then
+				player:setStorageValue(PlayerStorageKeys.Diapason.Lyre, math.max(0, lyreProgress) + 1)
+				player:setStorageValue(PlayerStorageKeys.Diapason.Edala, 1)
+				player:setStorageValue(PlayerStorageKeys.Diapason.LyreTimer, os.time() + 86400)
+			end
+		end
+	end
+
 	if not chance and instrument.remove then
 		item:remove()
 	end
+
 	player:addAchievementProgress("Rockstar", 10000)
 	return true
 end

@@ -1,6 +1,6 @@
 ---
 name: Feature Request
-about: Requesting a new feature for the engine or data pack
+about: Requesting a new feature for the data pack
 ---
 <!-- Welcome to the issues section if it's your first time! -->
 
@@ -14,5 +14,5 @@ about: Requesting a new feature for the engine or data pack
 <!-- If you know of any weird/hacky way to do what you want currently, explain. -->
 
 ### Prior art
-<!-- If what you are asking for has been previously implemented, provide links
+<!-- If what you are asking for has been previously implemented, provide linkes
      and description of what/how/where/when. -->

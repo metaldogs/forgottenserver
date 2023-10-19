@@ -3,66 +3,6 @@ local items = {
 		[2147] = { -- small ruby
 			[COMBAT_FIREDAMAGE] = {id = 2343, targetId = 2147} -- helmet of the ancients (enchanted)
 		},
-		[2383] = { -- spike sword
-			[COMBAT_FIREDAMAGE] = {id = 7744}, [COMBAT_ICEDAMAGE] = {id = 7763},
-			[COMBAT_EARTHDAMAGE] = {id = 7854}, [COMBAT_ENERGYDAMAGE] = {id = 7869}
-		},
-		[2391] = { -- war hammer
-			[COMBAT_FIREDAMAGE] = {id = 7758}, [COMBAT_ICEDAMAGE] = {id = 7777},
-			[COMBAT_EARTHDAMAGE] = {id = 7868}, [COMBAT_ENERGYDAMAGE] = {id = 7883}
-		},
-		[2423] = { -- clerical mace
-			[COMBAT_FIREDAMAGE] = {id = 7754}, [COMBAT_ICEDAMAGE] = {id = 7773},
-			[COMBAT_EARTHDAMAGE] = {id = 7864}, [COMBAT_ENERGYDAMAGE] = {id = 7879}
-		},
-		[2429] = { -- barbarian axe
-			[COMBAT_FIREDAMAGE] = {id = 7749}, [COMBAT_ICEDAMAGE] = {id = 7768},
-			[COMBAT_EARTHDAMAGE] = {id = 7859}, [COMBAT_ENERGYDAMAGE] = {id = 7874}
-		},
-		[2430] = { -- knight axe
-			[COMBAT_FIREDAMAGE] = {id = 7750}, [COMBAT_ICEDAMAGE] = {id = 7769},
-			[COMBAT_EARTHDAMAGE] = {id = 7860}, [COMBAT_ENERGYDAMAGE] = {id = 7875}
-		},
-		[2445] = { -- crystal mace
-			[COMBAT_FIREDAMAGE] = {id = 7755}, [COMBAT_ICEDAMAGE] = {id = 7774},
-			[COMBAT_EARTHDAMAGE] = {id = 7865}, [COMBAT_ENERGYDAMAGE] = {id = 7880}
-		},
-		[2454] = { -- war axe
-			[COMBAT_FIREDAMAGE] = {id = 7753}, [COMBAT_ICEDAMAGE] = {id = 7772},
-			[COMBAT_EARTHDAMAGE] = {id = 7863}, [COMBAT_ENERGYDAMAGE] = {id = 7878}
-		},
-		[7380] = { -- headchopper
-			[COMBAT_FIREDAMAGE] = {id = 7752}, [COMBAT_ICEDAMAGE] = {id = 7771},
-			[COMBAT_EARTHDAMAGE] = {id = 7862}, [COMBAT_ENERGYDAMAGE] = {id = 7877}
-		},
-		[7383] = { -- relic sword
-			[COMBAT_FIREDAMAGE] = {id = 7745}, [COMBAT_ICEDAMAGE] = {id = 7764},
-			[COMBAT_EARTHDAMAGE] = {id = 7855}, [COMBAT_ENERGYDAMAGE] = {id = 7870}
-		},
-		[7384] = { -- mystic blade
-			[COMBAT_FIREDAMAGE] = {id = 7746}, [COMBAT_ICEDAMAGE] = {id = 7765},
-			[COMBAT_EARTHDAMAGE] = {id = 7856}, [COMBAT_ENERGYDAMAGE] = {id = 7871}
-		},
-		[7389] = { -- heroic axe
-			[COMBAT_FIREDAMAGE] = {id = 7751}, [COMBAT_ICEDAMAGE] = {id = 7770},
-			[COMBAT_EARTHDAMAGE] = {id = 7861}, [COMBAT_ENERGYDAMAGE] = {id = 7876}
-		},
-		[7392] = { -- orcish maul
-			[COMBAT_FIREDAMAGE] = {id = 7757}, [COMBAT_ICEDAMAGE] = {id = 7776},
-			[COMBAT_EARTHDAMAGE] = {id = 7867}, [COMBAT_ENERGYDAMAGE] = {id = 7882}
-		},
-		[7402] = { -- dragon slayer
-			[COMBAT_FIREDAMAGE] = {id = 7748}, [COMBAT_ICEDAMAGE] = {id = 7767},
-			[COMBAT_EARTHDAMAGE] = {id = 7858}, [COMBAT_ENERGYDAMAGE] = {id = 7873}
-		},
-		[7406] = { -- blacksteel sword
-			[COMBAT_FIREDAMAGE] = {id = 7747}, [COMBAT_ICEDAMAGE] = {id = 7766},
-			[COMBAT_EARTHDAMAGE] = {id = 7857}, [COMBAT_ENERGYDAMAGE] = {id = 7872}
-		},
-		[7415] = { -- cranial basher
-			[COMBAT_FIREDAMAGE] = {id = 7756}, [COMBAT_ICEDAMAGE] = {id = 7775},
-			[COMBAT_EARTHDAMAGE] = {id = 7866}, [COMBAT_ENERGYDAMAGE] = {id = 7881}
-		},
 		[8905] = { -- rainbow shield
 			[COMBAT_FIREDAMAGE] = {id = 8906}, [COMBAT_ICEDAMAGE] = {id = 8907},
 			[COMBAT_EARTHDAMAGE] = {id = 8909}, [COMBAT_ENERGYDAMAGE] = {id = 8908}
@@ -103,6 +43,13 @@ local items = {
 		charges = 1000, effect = CONST_ME_MAGIC_RED
 	},
 
+	spheres = {
+		[7759] = {VOCATION_PALADIN, VOCATION_ROYAL_PALADIN},
+		[7760] = {VOCATION_SORCERER, VOCATION_MASTER_SORCERER},
+		[7761] = {VOCATION_DRUID, VOCATION_ELDER_DRUID},
+		[7762] = {VOCATION_KNIGHT, VOCATION_ELITE_KNIGHT}
+	},
+
 	valuables = {
 		[2146] = {id = 7759, shrine = {7508, 7509, 7510, 7511}}, -- small sapphire
 		[2147] = {id = 7760, shrine = {7504, 7505, 7506, 7507}}, -- small ruby
@@ -128,6 +75,20 @@ function onUse(player, item, fromPosition, target, toPosition, isHotkey)
 	local targetType = items.valuables[itemId] or items.equipment[items[itemId].targetId or targetId]
 	if not targetType then
 		return false
+	end
+
+	if table.contains({33268, 33269}, toPosition.x) and toPosition.y == 31830 and toPosition.z == 10 and player:getStorageValue(PlayerStorageKeys.ElementalSphere.QuestLine) > 0 then
+		if not table.contains(items.spheres[item.itemid], player:getVocation():getId()) then
+			return false
+		elseif table.contains({7915, 7916}, target.itemid) then
+			player:say("Turn off the machine first.", TALKTYPE_MONSTER_SAY)
+			return true
+		else
+			player:setStorageValue(PlayerStorageKeys.ElementalSphere.MachineGemCount, math.max(1, player:getStorageValue(PlayerStorageKeys.ElementalSphere.MachineGemCount) + 1))
+			toPosition:sendMagicEffect(CONST_ME_PURPLEENERGY)
+			item:transform(item.itemid, item.type - 1)
+			return true
+		end
 	end
 
 	if targetType.shrine then

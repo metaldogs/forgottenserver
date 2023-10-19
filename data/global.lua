@@ -78,6 +78,38 @@ closedLevelDoors = {
 	10789, 12095, 12102, 12195, 12204, 19845, 19854, 19985, 19994, 20278, 20287, 22819, 22828, 25286, 25293
 }
 
+function doCreatureSayWithRadius(cid, text, type, radiusx, radiusy, position)
+	if not position then
+		position = Creature(cid):getPosition()
+	end
+
+	local spectators, spectator = Game.getSpectators(position, false, true, radiusx, radiusx, radiusy, radiusy)
+	for i = 1, #spectators do
+		spectator = spectators[i]
+		spectator:say(text, type, false, spectator, position)
+	end
+end
+
+function getBlessingsCost(level)
+	if level <= 30 then
+		return 2000
+	elseif level >= 120 then
+		return 20000
+	else
+		return (level - 20) * 200
+	end
+end
+
+function getPvpBlessingCost(level)
+	if level <= 30 then
+		return 2000
+	elseif level >= 270 then
+		return 50000
+	else
+		return (level - 20) * 200
+	end
+end
+
 function getDistanceBetween(firstPosition, secondPosition)
 	local xDif = math.abs(firstPosition.x - secondPosition.x)
 	local yDif = math.abs(firstPosition.y - secondPosition.y)
