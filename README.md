@@ -4,6 +4,11 @@ TavernLight - Job Application - Nicolas de Castro Silva
 
 Creating Frigo spell: https://github.com/metaldogs/forgottenserver/blob/master/data/spells/scripts/attack/frigo.lua
 
+This video shows what i can archive:
+
+
+https://github.com/metaldogs/otclient/assets/12102397/055e52e4-1c3e-4779-9a1b-b0339a64e904
+
 ===============
 
 Here is the server i forked from OtLand and tried to implement the tasks for the Software Delevoper Job application
