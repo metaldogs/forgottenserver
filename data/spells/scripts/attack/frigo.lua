@@ -1,8 +1,8 @@
 
 --I tried lots of other ways to replicate de effect of the video, like create a new effect using ObjectBuilder but
 --this i will take ages to replicate and i will only show my art skills on AsePrite and not coding skills,
---but going this way make me learn how the client load assets, another way i tried is 
---create combat areas randonly for every time the player cast, and took some time to me to realise,
+--but going this way make me learn how the client load assets, another way i tried was 
+--creating combat areas randonly for every time the player cast, and took some time to me to realise,
 --combat areas are only loadded in the start of the server and you can not change inside onCastSpell().
 --So the code below is the closiest i can get to replicate the spell.
 
