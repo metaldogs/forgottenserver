@@ -17,6 +17,8 @@ To make it run properly, i followed the tutorial: https://otland.net/threads/fro
 
 I also created a fork of Meha's OtClient(https://github.com/metaldogs/otclient) to be easist to match with protocol, map, datapack and assets.
 
+Link to the client i used: https://github.com/metaldogs/otclient/tree/main
+
 Map and Datapack: https://github.com/EPuncker/orts2
 
 To to able to compile, i created a vcpgk manifest so Visual Studio can find all the libraries, i think my PC doesn't like enviroment variables and can't find the libraries in vcpkg folder.
