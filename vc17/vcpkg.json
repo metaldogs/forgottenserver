@@ -6,7 +6,6 @@
     "boost-lockfree",
     "boost-system",
     "boost-variant",
-    "boost-filesystem",
     "cryptopp",
     "fmt",
     "libmariadb",
@@ -21,11 +20,5 @@
       ]
     }
   },
-  "overrides": [
-    {
-      "name": "fmt",
-      "version": "9.1.0"
-    }
-  ],
-  "builtin-baseline": "501db0f17ef6df184fcdbfbe0f87cde2313b6ab1"
+  "builtin-baseline": "7f59e0013648f0dd80377330b770b414032233cb"
 }

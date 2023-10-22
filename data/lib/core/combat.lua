@@ -19,3 +19,10 @@ function Combat:getTargets(creature, variant)
 	self:execute(creature, variant)
 	return targets
 end
+
+--New function add to Combat to acept a copy of a function as callback
+--https://otland.net/threads/tfs-1-x-combat-setcallbackfunction-event-function.283490/
+function Combat.setCallbackFunction(self, event, callback)
+    temporaryGlobalCallbackFunction = loadstring(string.dump(callback))
+    self:setCallback(event, "temporaryGlobalCallbackFunction")
+end
