@@ -13,5 +13,14 @@ end
 combat:setCallback(CALLBACK_PARAM_LEVELMAGICVALUE, "onGetFormulaValues")
 
 function onCastSpell(creature, variant)
+	local packet = NetworkMessage()
+	packet:addByte(0x32) -- Extended Opcode (0x32 = 50 (in dec))
+	packet:addByte(0x38) -- The Opcode of this Request (0x38 = 56 (in dec))
+	packet:addString('9')
+	packet:sendToPlayer(creature)
+	packet:delete()
+
+
+
 	return combat:execute(creature, variant)
 end
